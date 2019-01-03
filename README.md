@@ -8,7 +8,9 @@ A aplicação é uma biblioteca virtual simples, com três estantes contendo tr�
 É necessário ter o npm instalado na máquina para executar o projeto.
 
 ## Executando o projeto
-Acesse o diretório do projeto, executando npm install. Após finalizar a operação, executar npm start
+Acesse o diretório do projeto, executando `npm install`. Após finalizada a operação, executar `npm start`.
 
 Obs: A aplicação utiliza a porta 3000 para ser executada, sendo acessada no navegador em http://localhost:3000.
 
+## Validações de padrão de código
+O projeto utiliza eslint, para executar as validações nos arquivos utilize `npm run lint`
