@@ -2,30 +2,35 @@
     "env": {
         "es6": true,
         "node": true,
-        "browser": true
+        "browser": true,
+        "jest": true
     },
     "parser": "babel-eslint",
     "extends": [
+        "airbnb",
         "eslint:recommended",
         "plugin:react/recommended"
     ],
     "plugins": [
         "react"
-    ],
+    ],    
     "parserOptions": {
         "ecmaFeatures": {
-            "jsx": true
-        }
+            "jsx": true,
+            "modules": true
+        },
+        "sourceType": "module"
     },
     "rules": {
-        "react/jsx-filename-extension": [
-            1,
-            {
-                "extensions": [
-                    ".js",
-                    ".jsx"
-                ]
-            }
-        ]
+        "no-console": [2, {"allow": ["warn", "error"]}],
+        "jsx-quotes": [2, "prefer-double"],
+        "react/jsx-filename-extension": [1, {"extensions": [".js", ".jsx"]}]
+    },
+    "settings": {
+        "react": {
+            "createClass": "createReactClass",
+            "pragma": "React",
+            "version": "16.6.3"
+        }
     }
 }

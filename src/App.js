@@ -1,6 +1,7 @@
 import React from 'react'
 import './css/App.css'
-// import * as BooksAPI from './BooksAPI'
+import * as BooksAPI from './service/BooksAPI'
+import Library from './component/Library'
 
 class BooksApp extends React.Component {
   state = {
@@ -8,10 +9,20 @@ class BooksApp extends React.Component {
     searchedBooks: []
   }
 
+  // Uma vez que o componente for renderizado, ele traz todos os livros do backend
+  componentDidMount() {
+    BooksAPI.getAll()
+      .then(myReads => {
+        this.setState({ myReads })
+      })
+  }
+
   render() {
+    const { myReads } = this.state;
+
     return (
       <div className="app">
-        <h1>BOOKS!</h1>
+        <Library books={myReads} />
       </div>
     )
   }
