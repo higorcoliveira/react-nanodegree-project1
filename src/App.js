@@ -6,10 +6,10 @@ import Library from './component/Library'
 class BooksApp extends React.Component {
   state = {
     myReads: [],
-    searchedBooks: []
+    // searchedBooks: []
   }
 
-  // Uma vez que o componente for renderizado, ele traz todos os livros do backend
+  // Uma vez que o componente for renderizado, traz todos os livros do backend
   componentDidMount() {
     BooksAPI.getAll()
       .then(myReads => {
