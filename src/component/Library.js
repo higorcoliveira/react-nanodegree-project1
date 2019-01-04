@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom'
 import PropTypes from 'prop-types';
 import Shelf from './Shelf';
 
@@ -22,7 +23,11 @@ const Library = props => {
           <Shelf shelfName="Quero Ler" books={wantToRead} updateShelf={updateShelf} />
           <Shelf shelfName="Já Li" books={read} updateShelf={updateShelf} />
         </div>
-        {/* TODO Colocar o campo de busca aqui */}
+        <div className="open-search">
+          <Link to="/search">
+            <button type="button">Adicionar livro</button>
+          </Link>
+        </div>
       </div>
     )
 };

@@ -1,12 +1,14 @@
-import React from 'react'
-import './css/App.css'
-import * as BooksAPI from './service/BooksAPI'
-import Library from './component/Library'
+import React from 'react';
+import './css/App.css';
+import { Route } from 'react-router-dom';
+import * as BooksAPI from './service/BooksAPI';
+import Library from './component/Library';
+import Search from './component/Search';
 
 class BooksApp extends React.Component {
   state = {
     myReads: [],
-    // searchedBooks: []
+    searchedBooks: []
   }
 
   // Uma vez que o componente for renderizado, traz todos os livros do backend
@@ -33,12 +35,28 @@ class BooksApp extends React.Component {
     }
   }
 
+  // limpa a busca
+  clearBooks = () => this.setState({ searchedBooks: [] });
+
   render() {
-    const { myReads } = this.state;
+    const { myReads, searchedBooks } = this.state;
 
     return (
       <div className="app">
-        <Library books={myReads} updateShelf={this.updateShelf} />
+        <Route
+          path="/search"
+          exact
+          render={() => (
+            <Search books={searchedBooks} updateShelf={this.updateShelf} clearBooks={this.clearBooks} />
+          )}
+        />
+        <Route 
+          path="/" 
+          exact 
+          render={() => (
+            <Library books={myReads} updateShelf={this.updateShelf} />
+          )}
+        />
       </div>
     )
   }

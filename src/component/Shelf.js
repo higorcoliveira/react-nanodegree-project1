@@ -5,11 +5,11 @@ import Book from './Book';
 /**
  * Componente que representa a estante da biblioteca. 
  * Possui os estados: currentlyReading, wantToRead, read e none
- * @param { shelfName, books } props 
+ * @param { shelfName, books, updateShelf } props 
  */
 const Shelf = props => {
-    const { shelfName, books, updateShelf } = props;
-
+    const { shelfName, books, updateShelf, hideLoading } = props;
+    
     return (
       <div className="bookshelf">
         <h2 className="bookshelf-title">{shelfName}</h2>
@@ -20,7 +20,7 @@ const Shelf = props => {
                 <Book book={book} updateShelf={updateShelf} />
               </li>
             ))}
-            {books.length <= 0 && <div>Carregando...</div>}
+            {books.length <= 0 && !hideLoading && <div>Carregando...</div>}
           </ol>
         </div>
       </div>
@@ -30,7 +30,12 @@ const Shelf = props => {
 Shelf.propTypes = {
     books: PropTypes.instanceOf(Array).isRequired,
     shelfName: PropTypes.string.isRequired,
-    updateShelf: PropTypes.func.isRequired
+    updateShelf: PropTypes.func.isRequired,
+    hideLoading: PropTypes.bool
 };
+
+Shelf.defaultProps = {
+  hideLoading: false
+}
 
 export default Shelf;

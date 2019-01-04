@@ -1,6 +1,10 @@
 import React from 'react'
 import PropTypes from 'prop-types';
 
+/**
+ * Componente que representa um livro, com as ações de mudança de prateleira
+ * @param {book, updateShelf} props 
+ */
 const Book = props => {
     const { book, updateShelf } = props;
 
