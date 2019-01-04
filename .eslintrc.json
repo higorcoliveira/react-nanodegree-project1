@@ -22,7 +22,7 @@
         "sourceType": "module"
     },
     "rules": {
-        "no-console": [2, {"allow": ["warn", "error"]}],
+        "no-console": [2, {"allow": ["warn"]}],
         "jsx-quotes": [2, "prefer-double"],
         "react/jsx-filename-extension": [1, {"extensions": [".js", ".jsx"]}]
     },

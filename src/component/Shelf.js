@@ -7,7 +7,7 @@ import PropTypes from 'prop-types';
  * @param { shelfName, books } props 
  */
 const Shelf = props => {
-    const { shelfName, books } = props;
+    const { shelfName, books, updateShelf } = props;
 
     return (
       <div className="bookshelf">
@@ -19,7 +19,15 @@ const Shelf = props => {
                 <div className="book">
                   <div className="book-top">
                     <div className="book-cover" style={{ width: 128, height: 170, backgroundImage: book.imageLinks ? (`url(${book.imageLinks.thumbnail})`) : (`url(https://dummyimage.com/128x170/4f4f4f/ffffff.jpg&text=No+Book+Art)`) }}>
-                      {/* TODO Colocar menu drop-down */}
+                      <div className="book-shelf-changer">
+                        <select value={book.shelf} onChange={e => updateShelf(book, e.target.value)}>
+                          <option disabled>Mover para...</option>
+                          <option value="currentlyReading">Lendo</option>
+                          <option value="wantToRead">Quero Ler</option>
+                          <option value="read">Já Li</option>
+                          <option value="none">Nenhum</option>
+                        </select>
+                      </div>
                     </div>
                   </div>
                   <div className="book-title">{book.title}</div>
@@ -36,7 +44,8 @@ const Shelf = props => {
 
 Shelf.propTypes = {
     books: PropTypes.instanceOf(Array).isRequired,
-    shelfName: PropTypes.string.isRequired
+    shelfName: PropTypes.string.isRequired,
+    updateShelf: PropTypes.func.isRequired
 };
 
 export default Shelf;

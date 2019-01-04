@@ -7,7 +7,7 @@ import Shelf from './Shelf';
  * @param { books } props 
  */
 const Library = props => {
-    const { books } = props;
+    const { books, updateShelf } = props;
     const currentlyReading = books.filter(book => book.shelf === 'currentlyReading');
     const wantToRead = books.filter(book => book.shelf === 'wantToRead');
     const read = books.filter(book => book.shelf === 'read');
@@ -18,9 +18,9 @@ const Library = props => {
           <h1>My Reads</h1>
         </div>
         <div className="list-books-content">
-          <Shelf shelfName="Lendo" books={currentlyReading} />
-          <Shelf shelfName="Quero Ler" books={wantToRead} />
-          <Shelf shelfName="Já Li" books={read} />
+          <Shelf shelfName="Lendo" books={currentlyReading} updateShelf={updateShelf} />
+          <Shelf shelfName="Quero Ler" books={wantToRead} updateShelf={updateShelf} />
+          <Shelf shelfName="Já Li" books={read} updateShelf={updateShelf} />
         </div>
         {/* TODO Colocar o campo de busca aqui */}
       </div>
@@ -28,7 +28,8 @@ const Library = props => {
 };
 
 Library.propTypes = {
-  books: PropTypes.instanceOf(Array).isRequired
+  books: PropTypes.instanceOf(Array).isRequired,
+  updateShelf: PropTypes.func.isRequired
 }
 
 export default Library;
