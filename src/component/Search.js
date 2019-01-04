@@ -16,7 +16,7 @@ class Search extends Component {
     }
 
     render() {
-        const { books, updateShelf } = this.props;
+        const { books, updateShelf, searchBook } = this.props;
         return (
           <div className="search-books">
             <div className="search-books-bar">
@@ -24,13 +24,14 @@ class Search extends Component {
               <div className="search-books-input-wrapper">
                 <input 
                   type="text" 
-                  placeholder="Procurar Livros por Autor ou Título..."
+                  placeholder="Procurar Livros..."
                   value={books.string}
+                  onChange={searchBook}
                 />
               </div>
             </div>
             <div className="search-books-results">
-              <Shelf shelfName="Resultados da Busca" books={books} updateShelf={updateShelf} hideLoading="true" />
+              <Shelf shelfName="Resultados da Busca" books={books} updateShelf={updateShelf} hideLoading={true} />
             </div>
           </div>
         )
@@ -40,7 +41,8 @@ class Search extends Component {
 Search.propTypes = {
   books: PropTypes.instanceOf(Array).isRequired,
   updateShelf: PropTypes.func.isRequired,
-  clearBooks: PropTypes.func.isRequired
+  clearBooks: PropTypes.func.isRequired,
+  searchBook: PropTypes.func.isRequired
 }
 
 export default Search;
