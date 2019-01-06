@@ -7,13 +7,14 @@ import PropTypes from 'prop-types';
  */
 const Book = props => {
     const { book, updateShelf } = props;
+    const shelfValue = book.hasOwnProperty('shelf') ? book.shelf : 'none';
 
     return (
       <div className="book">
         <div className="book-top">
-          <div className="book-cover" style={{ width: 128, height: 170, backgroundImage: book.imageLinks ? (`url(${book.imageLinks.thumbnail})`) : (`url(https://dummyimage.com/128x170/4f4f4f/ffffff.jpg&text=No+Book+Art)`) }}>
+          <div className="book-cover" style={{ width: 128, height: 170, backgroundImage: book.imageLinks ? (`url(${book.imageLinks.thumbnail})`) : (`url(http://i64.tinypic.com/1610pah.jpg)`) }}>
             <div className="book-shelf-changer">
-              <select value={book.shelf} onChange={e => updateShelf(book, e.target.value)}>
+              <select value={shelfValue} onChange={e => updateShelf(book, e.target.value)}>
                 <option disabled>Mover para...</option>
                 <option value="currentlyReading">Lendo</option>
                 <option value="wantToRead">Quero Ler</option>

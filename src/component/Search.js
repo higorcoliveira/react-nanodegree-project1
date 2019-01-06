@@ -9,7 +9,7 @@ import Shelf from './Shelf'
  */
 class Search extends Component {
 
-    // TODO Esvazia a busca quando o componente é renderizado
+    // Esvazia a busca quando o componente é renderizado
     componentDidMount() {
         const { clearBooks } = this.props;
         clearBooks();

@@ -21,26 +21,39 @@ class BooksApp extends React.Component {
   }
 
   // Encapsula a chamada da API de busca no AwesomeDebouncePromise
-  // Basicamente ele espera o usuário digitar o termo para buscar no backend
-  // Economiza chamadas inúteis no backend
+  // Espera o usuário digitar o termo para buscar no backend
   asyncSearch = (query) => BooksAPI.search(query);
   asyncSearchDebounced = AwesomeDebouncePromise(this.asyncSearch, 500);
 
-  // Atualiza o status de cada livro, sendo 'shelfSelected' o valor do status passado ao clicar
+  // Atualiza o status de cada livro, sendo 'shelf' o valor do status passado ao clicar
   updateShelf = (book, shelf) => {
+    if (shelf === 'none') {
+      this.setState(prevState => ({
+          myReads: prevState.myReads.filter(b => b.id !== book.id),
+      }))
+    }
+
     if (book.shelf !== shelf) { // mudou o status
       BooksAPI.update(book, shelf).then(() => { // atualiza o backend
-        const { myReads } = this.state;
-        const checkMyReadsId = myReads => myReads.id === book.id;
-        let myNewReads = [];
+        const { myReads, searchedBooks } = this.state;
+        const checkBookId = myReads => myReads.id === book.id;
+        let myNewReads, newSearchedBooks = [];
 
-        if (myReads.some(checkMyReadsId)) {
-          myNewReads = myReads.map(b => b.id === book.id ? {...b, shelf } : b);
+        if (myReads.some(checkBookId)) {
+          myNewReads = this.addNewBook(myReads, book, shelf);
+          newSearchedBooks = this.addNewBook(searchedBooks, book, shelf);
+        } else { // Passa o livro buscado que não existe no MyReads pra uma das estantes escolhidas
+          book.shelf = shelf
+          myNewReads = [...myReads, book]
+          newSearchedBooks = [...searchedBooks, book]
         }
-        this.setState({ myReads: myNewReads }); // atualiza o estado
+        this.setState({ myReads: myNewReads, searchedBooks: newSearchedBooks }); // atualiza o estado
       })
     }
   }
+
+  // Adiciona o novo objeto na lista existente
+  addNewBook = (books, book, shelf) => books.map(b => b.id === book.id ? {...b, shelf } : b);
 
   // Limpa a busca
   clearBooks = () => this.setState({ searchedBooks: [] });
@@ -58,11 +71,12 @@ class BooksApp extends React.Component {
       }
 
       this.setState({ searchedBooks: 
-        results.map(result => { // resultados encontrados, altera o estado
+        results.map(result => { // Reflete na busca o estado dos livros já adicionados em MyReads
           const { myReads } = this.state;
           myReads.forEach(book => {
-            if (book.id === result.id)
+            if (book.id === result.id) {              
               result.shelf = book.shelf
+            }
           })
           return result;
         })

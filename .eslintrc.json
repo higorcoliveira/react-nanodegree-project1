@@ -26,7 +26,8 @@
         "jsx-quotes": [2, "prefer-double"],
         "react/jsx-filename-extension": [1, {"extensions": [".js", ".jsx"]}],
         "react/jsx-boolean-value": [1, "always"],
-        "react/sort-comp": [0]
+        "react/sort-comp": [0],
+        "react/no-array-index-key": [0]
     },
     "settings": {
         "react": {

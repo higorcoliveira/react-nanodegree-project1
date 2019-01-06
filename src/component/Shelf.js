@@ -15,8 +15,8 @@ const Shelf = props => {
         <h2 className="bookshelf-title">{shelfName}</h2>
         <div className="bookshelf-books">
           <ol className="books-grid">
-            {Array.isArray(books) && books.map((book) => (
-              <li key={book.id}>
+            {Array.isArray(books) && books.map((book, index) => (
+              <li key={index}>
                 <Book book={book} updateShelf={updateShelf} />
               </li>
             ))}
