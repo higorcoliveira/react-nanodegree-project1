@@ -12,5 +12,6 @@ Acesse o diretório do projeto, executando `npm install`. Após finalizada a ope
 
 Obs: A aplicação utiliza a porta 3000 para ser executada, sendo acessada no navegador em http://localhost:3000.
 
-## Validações de padrão de código
-O projeto utiliza eslint, para executar as validações nos arquivos utilize `npm run lint`
+## Extras
+* O projeto utiliza o eslint para padronização de código. Para executar as validações nos arquivos utilize `npm run lint`
+* O projeto utiliza a lib awesome-debounce-promise para melhorar a busca, só enviando o termo de busca após um tempo e economizando assim chamadas desnecessárias ao backend
