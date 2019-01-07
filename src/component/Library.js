@@ -9,9 +9,10 @@ import Shelf from './Shelf';
  */
 const Library = props => {
     const { books, updateShelf } = props;
-    const currentlyReading = books.filter(book => book.shelf === 'currentlyReading');
-    const wantToRead = books.filter(book => book.shelf === 'wantToRead');
-    const read = books.filter(book => book.shelf === 'read');
+    const filter = shelf => books.filter(book => book.shelf === shelf);
+    const currentlyReading = filter('currentlyReading');
+    const wantToRead = filter('wantToRead');
+    const read = filter('read');
 
     return (
       <div className="list-books">

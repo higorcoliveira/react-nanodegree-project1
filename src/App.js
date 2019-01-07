@@ -13,11 +13,9 @@ class BooksApp extends React.Component {
   }
 
   // Uma vez que o componente for renderizado, traz todos os livros do backend
-  componentDidMount() {
-    BooksAPI.getAll()
-      .then(myReads => {
-        this.setState({ myReads })
-      })
+  async componentDidMount() {
+    const books = await BooksAPI.getAll();    
+    this.setState({ myReads: books });
   }
 
   // Encapsula a chamada da API de busca no AwesomeDebouncePromise

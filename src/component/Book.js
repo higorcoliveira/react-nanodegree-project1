@@ -1,12 +1,15 @@
-import React from 'react'
+import React, { PureComponent } from 'react'
 import PropTypes from 'prop-types';
 
 /**
  * Componente que representa um livro, com as ações de mudança de prateleira
+ * Usando pureComponent, já implementa o ciclo de vida shouldComponentUpdate 
  * @param {book, updateShelf} props 
  */
-const Book = props => {
-    const { book, updateShelf } = props;
+class Book extends PureComponent {
+
+  render() {
+    const { book, updateShelf } = this.props;
     const shelfValue = book.hasOwnProperty('shelf') ? book.shelf : 'none';
 
     return (
@@ -28,6 +31,7 @@ const Book = props => {
         <div className="book-authors">{Array.isArray(book.authors) ? book.authors.join(', '): ''}</div>
       </div>
     )
+  }
 }
 
 Book.propTypes = {
